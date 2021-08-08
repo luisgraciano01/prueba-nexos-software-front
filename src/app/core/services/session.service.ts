@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { IUsuario } from '@core/interfaces/usuario';
 import { BehaviorSubject } from 'rxjs';
 
@@ -16,7 +17,7 @@ export class SessionService {
    */
   private usuario$: BehaviorSubject<IUsuario>;
 
-  constructor() {
+  constructor(private router: Router) {
     const usuario = JSON.parse(sessionStorage.getItem('usuario'));
     this.usuario$ = new BehaviorSubject<IUsuario>(usuario);
   }
@@ -42,5 +43,14 @@ export class SessionService {
    */
   getCurrentUser(): IUsuario {
     return this.usuario$.value;
+  }
+
+  /**
+   * Cierra la sesión del usuario y lo redirecciona al login.
+   */
+  terminateSession(): void {
+    this.usuario$.next(null);
+    sessionStorage.removeItem('usuario');
+    this.router.navigate(['/login']);
   }
 }
