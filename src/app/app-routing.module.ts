@@ -8,6 +8,13 @@ const routes: Routes = [
       import('./features/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'inventario',
+    loadChildren: () =>
+      import('./features/inventario/inventario.module').then(
+        (m) => m.InventarioModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'login',
   },
