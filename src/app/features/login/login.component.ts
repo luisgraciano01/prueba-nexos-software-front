@@ -6,6 +6,7 @@ import {
   TrackByFunction,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IUsuario } from '@core/interfaces/usuario';
 import { SessionService } from '@core/services/session.service';
 import { UsuarioService } from '@core/services/usuario.service';
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
     private usarioService: UsuarioService,
     private sessionService: SessionService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.listaUsuarios = [];
@@ -65,6 +67,8 @@ export class LoginComponent implements OnInit {
           (usuario) => usuario.idUsuario == this.usuarioFormControl.value
         )
       );
+
+      this.router.navigate(['/inventario']);
     }
   }
 }
