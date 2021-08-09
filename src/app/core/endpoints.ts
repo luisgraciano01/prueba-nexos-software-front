@@ -8,6 +8,8 @@ interface Endpoints {
   };
   mercancia: {
     findByMultipleCriteria: string;
+    checkIfExistsMercancia: string;
+    save: string;
   };
 }
 
@@ -28,6 +30,8 @@ const buildEnpoints = (apiUrl: string): Endpoints => ({
     const base = apiUrl + '/mercancia';
     return {
       findByMultipleCriteria: base + '/findByMultipleCriteria',
+      checkIfExistsMercancia: base + '/checkIfExistsMercancia',
+      save: base + '/save',
     };
   },
 });

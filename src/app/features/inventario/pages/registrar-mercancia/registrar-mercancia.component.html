@@ -1,1 +1,151 @@
-<p>registrar-mercancia works!</p>
+<h3>Registrar mercancía</h3>
+<div class="row">
+  <div class="col-12">
+    <ngb-alert
+      #selfClosingAlert
+      *ngIf="alertData"
+      [type]="alertData.type"
+      (closed)="alertData = null"
+      >{{ alertData.message }}
+    </ngb-alert>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="registroMercanciaForm" (ngSubmit)="guardar()">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label>Nombre producto</label>
+            <input
+              id="nombreProductoInput"
+              type="text"
+              name="nombreProducto"
+              formControlName="nombreProducto"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  nombreProductoFormControl.errors &&
+                  (nombreProductoFormControl.dirty ||
+                    nombreProductoFormControl.touched),
+                'is-valid':
+                  !nombreProductoFormControl.errors &&
+                  nombreProductoFormControl.dirty &&
+                  nombreProductoFormControl.touched
+              }"
+            />
+            <div class="invalid-feedback">
+              <p *ngIf="nombreProductoFormControl.hasError('required')">
+                El nombre del producto es requerido.
+              </p>
+              <p *ngIf="nombreProductoFormControl.hasError('maxlength')">
+                El nombre del producto no debe superar los 100 carácteres.
+              </p>
+              <p *ngIf="nombreProductoFormControl.hasError('existsMercancia')">
+                Ya existe una mercancía con ese nombre.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label>Cantidad</label>
+            <input
+              id="cantidadInput"
+              type="number"
+              name="cantidad"
+              min="1"
+              max="10000000"
+              formControlName="cantidad"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  cantidadFormControl.errors &&
+                  (cantidadFormControl.dirty || cantidadFormControl.touched),
+                'is-valid':
+                  !cantidadFormControl.errors &&
+                  cantidadFormControl.dirty &&
+                  cantidadFormControl.touched
+              }"
+            />
+            <div class="invalid-feedback">
+              <p *ngIf="cantidadFormControl.hasError('required')">
+                La cantidad es requerida.
+              </p>
+              <p *ngIf="cantidadFormControl.hasError('max')">
+                La cantidad debe ser menor o igual a 10000000.
+              </p>
+              <p *ngIf="cantidadFormControl.hasError('min')">
+                La cantidad debe ser mayor o igual a 1.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <label>Fecha de ingreso</label>
+          <div class="input-group">
+            <input
+              id="fechaIngresoDatepicker"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="fechaIngreso"
+              formControlName="fechaIngreso"
+              ngbDatepicker
+              [minDate]="{
+                year: currentDate.getFullYear() - 100,
+                month: currentDate.getMonth(),
+                day: currentDate.getDate()
+              }"
+              [maxDate]="{
+                year: currentDate.getFullYear(),
+                month: currentDate.getMonth(),
+                day: currentDate.getDate()
+              }"
+              #fechaIngresoDatepicker="ngbDatepicker"
+              [ngClass]="{
+                'is-invalid':
+                  fechaIngresoFormControl.errors &&
+                  (fechaIngresoFormControl.dirty ||
+                    fechaIngresoFormControl.touched),
+                'is-valid':
+                  !fechaIngresoFormControl.errors &&
+                  fechaIngresoFormControl.dirty &&
+                  fechaIngresoFormControl.touched
+              }"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                (click)="fechaIngresoDatepicker.toggle()"
+                [disabled]="fechaIngresoFormControl.disabled"
+                class="btn btn-outline-secondary calendar"
+              ></button>
+            </div>
+            <div class="invalid-feedback">
+              <p *ngIf="fechaIngresoFormControl.hasError('required')">
+                La fecha de ingreso es requerida.
+              </p>
+              <p *ngIf="fechaIngresoFormControl.hasError('ngbDate')">
+                La fecha de ingreso no tiene un formato válido AAAA-MM-DD.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="form-group">
+            <button
+              type="submit"
+              [disabled]="registroMercanciaForm.invalid || loading"
+              class="btn btn-primary btn-block"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
