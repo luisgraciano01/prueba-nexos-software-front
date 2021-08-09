@@ -6,6 +6,9 @@ interface Endpoints {
   usuario: {
     findAll: string;
   };
+  mercancia: {
+    findByMultipleCriteria: string;
+  };
 }
 
 /**
@@ -19,6 +22,12 @@ const buildEnpoints = (apiUrl: string): Endpoints => ({
     const base = apiUrl + '/usuario';
     return {
       findAll: base + '/findAll',
+    };
+  },
+  get mercancia() {
+    const base = apiUrl + '/mercancia';
+    return {
+      findByMultipleCriteria: base + '/findByMultipleCriteria',
     };
   },
 });

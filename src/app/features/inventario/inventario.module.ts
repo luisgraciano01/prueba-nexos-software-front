@@ -5,6 +5,11 @@ import { InventarioComponent } from './inventario.component';
 import { RegistrarMercanciaComponent } from './pages/registrar-mercancia/registrar-mercancia.component';
 import { EditarMercanciaComponent } from './pages/editar-mercancia/editar-mercancia.component';
 import { ConsultarMercanciaComponent } from './pages/consultar-mercancia/consultar-mercancia.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  NgbAlertModule,
+  NgbDatepickerModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,6 +18,13 @@ import { ConsultarMercanciaComponent } from './pages/consultar-mercancia/consult
     EditarMercanciaComponent,
     ConsultarMercanciaComponent,
   ],
-  imports: [CommonModule, InventarioRoutingModule],
+  imports: [
+    CommonModule,
+    InventarioRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbDatepickerModule,
+    NgbAlertModule,
+  ],
 })
 export class InventarioModule {}

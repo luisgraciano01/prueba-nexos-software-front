@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionService } from '@core/services/session.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { AppConfigService } from '@core/services/app-config.service';
+import { MercanciaService } from '@core/services/mercancia.service';
 
 /**
  * Módulo `Core` que contiene los componentes, servicios y demás
@@ -14,6 +15,11 @@ import { AppConfigService } from '@core/services/app-config.service';
 @NgModule({
   declarations: [],
   imports: [CommonModule, HttpClientModule],
-  providers: [AppConfigService, SessionService, UsuarioService],
+  providers: [
+    AppConfigService,
+    SessionService,
+    UsuarioService,
+    MercanciaService,
+  ],
 })
 export class CoreModule {}

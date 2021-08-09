@@ -1,1 +1,133 @@
-<p>consultar-mercancia works!</p>
+<h3>Consulta mercancía</h3>
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="consultaForm" (ngSubmit)="consultar()">
+      <div class="row">
+        <div class="col-12 col-sm-3">
+          <div class="form-group">
+            <label>Usuario registra</label>
+            <select
+              id="usuarioSelect"
+              name="usuario"
+              formControlName="usuario"
+              [ngClass]="{
+                'is-invalid':
+                  usuarioFormControl.errors &&
+                  (usuarioFormControl.dirty || usuarioFormControl.touched)
+              }"
+              class="form-control"
+            >
+              <option [value]="0">Seleccione...</option>
+              <option
+                *ngFor="let usuario of listaUsuarios; trackBy: trackByFnUsuario"
+                [value]="usuario.idUsuario"
+              >
+                {{ usuario.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="form-group">
+            <label>Nombre producto</label>
+            <input
+              id="nombreProductoInput"
+              type="text"
+              name="usuario"
+              formControlName="nombreProducto"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <label>Fecha ingreso</label>
+          <div class="input-group">
+            <input
+              id="fechaIngresoDatepicker"
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              formControlName="fechaIngreso"
+              ngbDatepicker
+              #fechaIngresoDatepicker="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                (click)="fechaIngresoDatepicker.toggle()"
+                [disabled]="fechaIngresoFormControl.disabled"
+                class="btn btn-outline-secondary calendar"
+              ></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3">
+          <div class="form-group">
+            <label>&nbsp;</label>
+            <button
+              type="submit"
+              [disabled]="consultaForm.invalid || loading"
+              class="btn btn-primary btn-block"
+            >
+              Consultar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <ngb-alert
+      #selfClosingAlert
+      *ngIf="alertData"
+      [type]="alertData.type"
+      (closed)="alertData = null"
+      >{{ alertData.message }}
+    </ngb-alert>
+  </div>
+</div>
+
+<div *ngIf="listaMercancia && listaMercancia.length" class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <th scope="col">Nombre producto</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Fecha ingreso</th>
+        <th scope="col">Usuario registra</th>
+        <th scope="col">Fecha registro</th>
+        <th scope="col">Acciones</th>
+      </thead>
+      <tr *ngFor="let mercancia of listaMercancia">
+        <td>{{ mercancia.nombreProducto }}</td>
+        <td>{{ mercancia.cantidad }}</td>
+        <td>{{ mercancia.fechaIngreso | date: "dd/MM/yyyy" }}</td>
+        <td>{{ mercancia.usuarioRegistra.nombre }}</td>
+        <td>{{ mercancia.fechaRegistro | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+        <td>
+          <div
+            *ngIf="mercancia.usuarioRegistra.idUsuario == currentUser.idUsuario"
+          >
+            <button
+              type="button"
+              title="Editar"
+              class="btn btn-outline-danger mx-2"
+            >
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button
+              type="button"
+              title="Eliminar"
+              class="btn btn-outline-danger mx-2"
+            >
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
