@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       usuario: [null, [Validators.required]],
     });
+
+    if (this.sessionService.getCurrentUser()) {
+      this.router.navigate(['/inventario'], { replaceUrl: true });
+    }
   }
 
   get usuarioFormControl() {
@@ -68,7 +72,7 @@ export class LoginComponent implements OnInit {
         )
       );
 
-      this.router.navigate(['/inventario']);
+      this.router.navigate(['/inventario'], { replaceUrl: true });
     }
   }
 }

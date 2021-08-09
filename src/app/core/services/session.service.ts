@@ -51,6 +51,6 @@ export class SessionService {
   terminateSession(): void {
     this.usuario$.next(null);
     sessionStorage.removeItem('usuario');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { replaceUrl: true });
   }
 }

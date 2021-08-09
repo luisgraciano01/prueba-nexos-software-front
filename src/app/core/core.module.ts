@@ -5,6 +5,7 @@ import { SessionService } from '@core/services/session.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { AppConfigService } from '@core/services/app-config.service';
 import { MercanciaService } from '@core/services/mercancia.service';
+import { AuthGuard } from '@core/guards/auth.guard';
 
 /**
  * Módulo `Core` que contiene los componentes, servicios y demás
@@ -20,6 +21,7 @@ import { MercanciaService } from '@core/services/mercancia.service';
     SessionService,
     UsuarioService,
     MercanciaService,
+    AuthGuard,
   ],
 })
 export class CoreModule {}
