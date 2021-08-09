@@ -19,7 +19,7 @@ const routes: Routes = [
         component: RegistrarMercanciaComponent,
       },
       {
-        path: 'editar-mercancia',
+        path: 'editar-mercancia/:idMercancia',
         component: EditarMercanciaComponent,
       },
       {

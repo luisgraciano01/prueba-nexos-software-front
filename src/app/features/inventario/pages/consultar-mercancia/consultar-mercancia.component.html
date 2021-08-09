@@ -108,24 +108,22 @@
         <td>{{ mercancia.usuarioRegistra.nombre }}</td>
         <td>{{ mercancia.fechaRegistro | date: "dd/MM/yyyy HH:mm:ss" }}</td>
         <td>
-          <div
-            *ngIf="mercancia.usuarioRegistra.idUsuario == currentUser.idUsuario"
+          <button
+            (click)="editar(mercancia.idMercancia)"
+            type="button"
+            title="Editar"
+            class="btn btn-outline-danger mx-2"
           >
-            <button
-              type="button"
-              title="Editar"
-              class="btn btn-outline-danger mx-2"
-            >
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-            <button
-              type="button"
-              title="Eliminar"
-              class="btn btn-outline-danger mx-2"
-            >
-              <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </button>
-          </div>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button
+            *ngIf="mercancia.usuarioRegistra.idUsuario == currentUser.idUsuario"
+            type="button"
+            title="Eliminar"
+            class="btn btn-outline-danger mx-2"
+          >
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </button>
         </td>
       </tr>
     </table>

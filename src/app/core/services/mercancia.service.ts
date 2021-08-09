@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IActualizarMercanciaRequest } from '@core/interfaces/actualizar-mercancia.request';
 import { IHttpResponse } from '@core/interfaces/http-response';
 import { IMercancia } from '@core/interfaces/mercancia';
 import { IRegistroMercanciaRequest } from '@core/interfaces/registro-mercancia.request';
@@ -79,6 +80,32 @@ export class MercanciaService {
   save(registroMercanciaRequest: IRegistroMercanciaRequest) {
     return this.httpClient.post<IHttpResponse<boolean | IValidationError>>(
       this.appConfigService.endpoints.mercancia.save,
+      registroMercanciaRequest
+    );
+  }
+
+  /**
+   * Construye un observable que hace la petición al endpoint `/mercancia/findById`
+   * que obtiene registra una mercancía.
+   *
+   * @returns Obsevable con la petición lista para ser cosumida.
+   */
+  findById(idMercancia: number) {
+    return this.httpClient.get<IHttpResponse<IMercancia>>(
+      this.appConfigService.endpoints.mercancia.findById,
+      { params: { idMercancia: idMercancia } }
+    );
+  }
+
+  /**
+   * Construye un observable que hace la petición al endpoint `/mercancia/update`
+   * que obtiene registra una mercancía.
+   *
+   * @returns Obsevable con la petición lista para ser cosumida.
+   */
+  update(registroMercanciaRequest: IActualizarMercanciaRequest) {
+    return this.httpClient.post<IHttpResponse<boolean | IValidationError>>(
+      this.appConfigService.endpoints.mercancia.update,
       registroMercanciaRequest
     );
   }

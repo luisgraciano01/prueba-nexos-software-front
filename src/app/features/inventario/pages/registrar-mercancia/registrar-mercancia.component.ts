@@ -18,7 +18,6 @@ import { IAlertData } from '@core/interfaces/alert-data';
 import { IUsuario } from '@core/interfaces/usuario';
 import { MercanciaService } from '@core/services/mercancia.service';
 import { SessionService } from '@core/services/session.service';
-import { UsuarioService } from '@core/services/usuario.service';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, finalize, map, takeUntil, tap } from 'rxjs/operators';
@@ -43,7 +42,6 @@ export class RegistrarMercanciaComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean>;
   constructor(
-    private usarioService: UsuarioService,
     private mercanciaService: MercanciaService,
     private sessionService: SessionService,
     private formBuilder: FormBuilder,

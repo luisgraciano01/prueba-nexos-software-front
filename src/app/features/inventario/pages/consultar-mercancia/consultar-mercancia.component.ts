@@ -17,6 +17,7 @@ import { Subject } from 'rxjs';
 import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { IAlertData } from '@core/interfaces/alert-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-mercancia',
@@ -44,6 +45,7 @@ export class ConsultarMercanciaComponent implements OnInit, OnDestroy {
     private mercanciaService: MercanciaService,
     private sessionService: SessionService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.alerts$ = new Subject<IAlertData>();
@@ -168,5 +170,9 @@ export class ConsultarMercanciaComponent implements OnInit, OnDestroy {
           }
         );
     }
+  }
+
+  editar(idMercancia: number) {
+    this.router.navigate(['/inventario/editar-mercancia', idMercancia]);
   }
 }

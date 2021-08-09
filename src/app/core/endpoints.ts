@@ -10,6 +10,8 @@ interface Endpoints {
     findByMultipleCriteria: string;
     checkIfExistsMercancia: string;
     save: string;
+    findById: string;
+    update: string;
   };
 }
 
@@ -32,6 +34,8 @@ const buildEnpoints = (apiUrl: string): Endpoints => ({
       findByMultipleCriteria: base + '/findByMultipleCriteria',
       checkIfExistsMercancia: base + '/checkIfExistsMercancia',
       save: base + '/save',
+      findById: base + '/findById',
+      update: base + '/update',
     };
   },
 });
