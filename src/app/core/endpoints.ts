@@ -12,6 +12,7 @@ interface Endpoints {
     save: string;
     findById: string;
     update: string;
+    delete: string;
   };
 }
 
@@ -36,6 +37,7 @@ const buildEnpoints = (apiUrl: string): Endpoints => ({
       save: base + '/save',
       findById: base + '/findById',
       update: base + '/update',
+      delete: base + '/delete',
     };
   },
 });

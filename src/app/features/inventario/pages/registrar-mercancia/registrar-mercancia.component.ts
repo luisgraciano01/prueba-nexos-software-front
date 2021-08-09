@@ -176,7 +176,7 @@ export class RegistrarMercanciaComponent implements OnInit, OnDestroy {
               this.alerts$.next({
                 type: 'danger',
                 message:
-                  'Ha ocurrido un error durante el, inténtelo de nuevo más tarde.',
+                  'Ha ocurrido un error durante el registro, inténtelo de nuevo más tarde.',
               });
             }
           },

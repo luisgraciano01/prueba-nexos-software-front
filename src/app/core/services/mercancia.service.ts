@@ -109,4 +109,17 @@ export class MercanciaService {
       registroMercanciaRequest
     );
   }
+
+  /**
+   * Construye un observable que hace la petición al endpoint `/mercancia/delete`
+   * que obtiene registra una mercancía.
+   *
+   * @returns Obsevable con la petición lista para ser cosumida.
+   */
+  delete(idMercancia: number) {
+    return this.httpClient.post<IHttpResponse<boolean | IValidationError>>(
+      this.appConfigService.endpoints.mercancia.delete,
+      { idMercancia }
+    );
+  }
 }

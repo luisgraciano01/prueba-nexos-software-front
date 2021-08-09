@@ -112,14 +112,17 @@
             (click)="editar(mercancia.idMercancia)"
             type="button"
             title="Editar"
+            [disabled]="loading"
             class="btn btn-outline-danger mx-2"
           >
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </button>
           <button
             *ngIf="mercancia.usuarioRegistra.idUsuario == currentUser.idUsuario"
+            (click)="eliminar(mercancia.idMercancia)"
             type="button"
             title="Eliminar"
+            [disabled]="loading"
             class="btn btn-outline-danger mx-2"
           >
             <i class="fa fa-trash-o" aria-hidden="true"></i>

@@ -175,4 +175,49 @@ export class ConsultarMercanciaComponent implements OnInit, OnDestroy {
   editar(idMercancia: number) {
     this.router.navigate(['/inventario/editar-mercancia', idMercancia]);
   }
+
+  eliminar(idMercancia: number) {
+    this.loading = false;
+    this.consultaForm.disable();
+    this.changeDetectorRef.detectChanges();
+
+    this.mercanciaService
+      .delete(idMercancia)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.consultaForm.enable();
+          this.changeDetectorRef.detectChanges();
+
+          this.consultar();
+        })
+      )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (response) => {
+          if (response.exitoso) {
+            if (response.data && response.data == true) {
+              this.alerts$.next({
+                type: 'info',
+                message: 'Se ha eliminado con éxito la mercancía.',
+              });
+            }
+          } else {
+            this.alerts$.next({
+              type: 'danger',
+              message:
+                'Ha ocurrido un error durante la eliminación, inténtelo de nuevo más tarde.',
+            });
+          }
+        },
+        (error) => {
+          this.alerts$.next({
+            type: 'danger',
+            message:
+              'Ha ocurrido un error durante la eliminación, inténtelo de nuevo más tarde.',
+          });
+          console.error(error);
+        }
+      );
+  }
 }
